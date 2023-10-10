@@ -5,7 +5,7 @@ import java.lang.*;
 public class MyAppT {
 
     public boolean isLogedin;
-    public static ArrayList<User> up=new ArrayList<User>();
+    public ArrayList<User> up=new ArrayList<User>();
 
 
     public MyAppT() {
