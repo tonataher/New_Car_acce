@@ -21,6 +21,6 @@ Feature: Roles
   Scenario: Installer role
     Given I am in system
     And I'm the Installer
-    When Set user name "haya" and pass "123"
+    When set user name "haya" and pass "123"
     Then You can View installation requests
     And View schedule appointments

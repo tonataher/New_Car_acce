@@ -11,7 +11,6 @@ import javax.swing.*;
 
 public class loginstep {
     public MyAppT obj;
-    public boolean f=false;
     public boolean forget = false;
     public String enteredUsername;
     public String enteredPassword;
@@ -31,77 +30,74 @@ public class loginstep {
     public void setUsernameAndPassAndPassFromSystem(String user_name, String pass) {
         // Write code here that turns the phrase above into concrete actions
         // throw new io.cucumber.java.PendingException();
-        f=false;
         for (User u: obj.up) {
 
             if (user_name.equals(u.getUser_name()) && u.getPass().equals(pass)) {
-                f = true;
+                obj.f = true;
                 break;
             }
         }
 
-        assertTrue(f);
+        assertTrue(obj.f);
     }
     @Then("login succeed")
     public void loginSucceed() {
         // Write code here that turns the phrase above into concrete actions
         // throw new io.cucumber.java.PendingException();
-        assertTrue("Login should succeed", f);
+        assertTrue("Login should succeed", obj.f);
     }
 
     @Then("login failed")
     public void loginFailed() {
         // Write code here that turns the phrase above into concrete actions
         // throw new io.cucumber.java.PendingException();
-        assertFalse("Login should fail", f);
+        assertFalse("Login should fail", obj.f);
     }
 
     @When("set invalid username {string} and pass {string}")
     public void setInvalidUsernameAndPass(String user_name, String pass) {
         // Write code here that turns the phrase above into concrete actions
-         f=false;
         for (User u: obj.up) {
 
             if (user_name.equals(u.getUser_name()) && u.getPass().equals(pass)) {
-                f = true;
+                obj.f = true;
                 break;
             }
         }
 
-        assertFalse(f);
+        assertFalse(obj.f);
     }
 
 
     @When("set valid username {string} and invalid pass {string}")
     public void setValidUsernameAndInvalidPass(String user_name, String pass) {
-        f=false;
         for (User u: obj.up) {
 
             if (user_name.equals(u.getUser_name()) && u.getPass().equals(pass)) {
-                f = true;
+                obj.f = true;
                 break;
             }
         }
 
-        assertFalse(f);
+        assertFalse(obj.f);
     }
 
     @When("set empty username {string} and pass {string}")
     public void setEmptyUsernameAndPass(String user_name, String pass) {
 
         if (user_name.isEmpty())
-            f = false;
+            obj.f = false;
 
-        assertFalse(f);
+        assertFalse(obj.f);
     }
 
     @When("set valid username {string} and empty pass {string}")
     public void setValidUsernameAndEmptyPass(String user_name, String pass) {
 
         if (pass.isEmpty())
-            f = false;
+            obj.f = false;
 
-        assertFalse(f);
+        assertFalse(obj.f);
     }
 
     @When("set valid username {string} and  pass {string}")
