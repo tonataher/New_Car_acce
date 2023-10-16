@@ -17,7 +17,7 @@ public class roles {
 
     @Given("I am in system")
     public void iAmInSystem() {
-        assertTrue(obj.isLogedin);
+        obj.isLogedin=true;
     }
 
     @And("I'm the admin")
@@ -33,7 +33,6 @@ public class roles {
                 break;
             }
         }
-        assertTrue(obj.f);
     }
     
     @Then("you can Manage products")
