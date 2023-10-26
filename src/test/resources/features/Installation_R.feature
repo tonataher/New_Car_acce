@@ -5,6 +5,7 @@ Feature: Installation Requests
 
   Scenario: Customer submits an installation request
     Given I'm the Customer
+    And My name is "Mai"
     And  I'm on the installation request page
     When the customer fills in the following details: model is "Toyota" and date "20-10-2023"
     And submits the form
@@ -12,6 +13,7 @@ Feature: Installation Requests
 
   Scenario: Customer submits an invalid installation request
     Given I'm the Customer
+    And My name is "Mai"
     And  I'm on the installation request page
     When the customer fills in the following details: model is "Honda" and date "25-10-2023"
     And  submits the form
