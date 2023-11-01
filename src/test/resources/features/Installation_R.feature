@@ -5,9 +5,9 @@ Feature: Installation Requests
 
   Scenario: Customer submits an installation request
     Given I'm the Customer
-    And My name is "Mai"
+    And My name is "haya"
     And  I'm on the installation request page
-    When the customer fills in the following details: model is "Toyota" and date "20-10-2023"
+    When the customer fills in the following details: model is "motor" and date "20-10-2023"
     And submits the form
     Then the request should be successfully submitted if the date available
 

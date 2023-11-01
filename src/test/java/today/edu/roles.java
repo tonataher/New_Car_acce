@@ -1,13 +1,14 @@
 package today.edu;
-import static org.junit.Assert.assertTrue;
-
+import today.edu.MyAppT;
+import today.edu.User;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 
-public class roles {
+import static org.junit.Assert.assertTrue;
 
+public class roles{
     public MyAppT obj;
     private String userRole;
     public roles(MyAppT iobj) {
@@ -17,7 +18,7 @@ public class roles {
 
     @Given("I am in system")
     public void iAmInSystem() {
-        obj.isLogedin=true;
+        obj.isLogged=true;
     }
 
     @And("I'm the admin")
@@ -34,20 +35,20 @@ public class roles {
             }
         }
     }
-    
+
     @Then("you can Manage products")
     public void youCanManageProducts() {
-        assertTrue("Admin can manage products", obj.isLogedin && userRole.equals("admin"));
+        assertTrue("Admin can manage products", obj.isLogged && userRole.equals("admin"));
     }
 
     @And("see categories")
     public void seeCategories() {
-        assertTrue("Admin can see categories", obj.isLogedin && userRole.equals("admin"));
+        assertTrue("Admin can see categories", obj.isLogged && userRole.equals("admin"));
     }
 
     @And("access user accounts")
     public void accessUserAccounts() {
-        assertTrue("Admin can access user accounts", obj.isLogedin && userRole.equals("admin"));
+        assertTrue("Admin can access user accounts", obj.isLogged && userRole.equals("admin"));
     }
 
     @And("I'm the Customer")
@@ -57,17 +58,17 @@ public class roles {
 
     @Then("You can Browse products")
     public void youCanBrowseProducts() {
-        assertTrue("Customer can browse products",userRole.equals("customer") && obj.isLogedin);
+        assertTrue("Customer can browse products",userRole.equals("customer") && obj.isLogged);
     }
 
     @And("Make purchases")
     public void makePurchases() {
-        assertTrue("Customer can make Purchases",userRole.equals("customer") && obj.isLogedin);
+        assertTrue("Customer can make Purchases",userRole.equals("customer") && obj.isLogged);
     }
 
     @And("View orders")
     public void viewOrders() {
-        assertTrue("Customer can view orders",userRole.equals("customer") && obj.isLogedin);
+        assertTrue("Customer can view orders",userRole.equals("customer") && obj.isLogged);
     }
 
     @And("I'm the Installer")
@@ -77,11 +78,11 @@ public class roles {
 
     @Then("You can View installation requests")
     public void youCanViewInstallationRequests() {
-        assertTrue("Installer can View installation requests",userRole.equals("installer") && obj.isLogedin);
+        assertTrue("Installer can View installation requests",userRole.equals("installer") && obj.isLogged);
     }
 
     @And("View schedule appointments")
     public void viewScheduleAppointments() {
-        assertTrue("Installer can View schedule appointments",userRole.equals("installer") && obj.isLogedin);
+        assertTrue("Installer can View schedule appointments",userRole.equals("installer") && obj.isLogged);
     }
 }

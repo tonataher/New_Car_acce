@@ -2,7 +2,7 @@ Feature: login
 
   Scenario: valid loginn
     Given I am not in system
-    When set username "haya" and pass "123" and pass from system
+    When set username "haya" and pass "123"
     Then login succeed
 
 
@@ -36,5 +36,5 @@ Feature: login
   Scenario: User needs to Create Account
     Given I am not in system
     And i don't have an account
-    When set new username "Mai" and pass "54321"
+    When set new username "Mai" and pass "54321" and bd="7\3\2004"
     Then create succeed

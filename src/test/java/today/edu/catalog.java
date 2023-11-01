@@ -1,27 +1,36 @@
 package today.edu;
 
+import today.edu.MyAppT;
+import today.edu.car;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 
 import java.util.ArrayList;
-import static org.junit.Assert.*;
+
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 
 public class catalog {
     public MyAppT obj;
     public boolean added = false;
-    public car cc;
+    public car cc=new car();
     public ArrayList<car> carArrayList = new ArrayList<car>();
     public String Categorie;
 
     public catalog(MyAppT iobj){
         super();
         this.obj = iobj;
+        car c1 = new car("motor","Interior",5000,1,"essintial part");
+        obj.cp.add(c1);
+        car c2 = new car("motor-v2","Interior",5000,100,"essintial part");
+        obj.cp.add(c2);
     }
 
     @When("the name is {string} and categorie is {string} and price is {int} and availability is {int} and descriptions is {string}")
     public void theNameIsAndCategorieIsAndPriceIsAndAvailabilityIsAndDescriptionsIs(String name, String categorie, int price, int ava, String desc) {
-        obj.cp.add(new car(name,categorie,price,ava,desc));
+        //obj.cp.add(new car(name,categorie,price,ava,desc));
+        obj.theNameIsAndCategorieIsAndPriceIsAndAvailabilityIsAndDescriptionsIs(name,categorie,price,ava,desc);
         added=true;
     }
 
@@ -32,15 +41,7 @@ public class catalog {
 
     @When("I request information about specific product by entering its name {string}")
     public void iRequestInformationAboutSpecificProductByEnteringItsName(String name) {
-        for(car c: obj.cp ){
-            if(name.equals(c.car_name)){
-              cc.setDescr(c.getDescr());
-              cc.setPrice(c.getPrice());
-              cc.setAvailab(c.getAvailab());
-              cc.setCar_name(c.getCar_name());
-              cc.setCategorie(c.getCategorie());
-            }
-        }
+        obj.iRequestInformationAboutSpecificProductByEnteringItsName(name);
     }
 
     @Then("Make the product descriptions, prices, and availability appear")
@@ -104,5 +105,4 @@ public class catalog {
             }
         }
     }
-
 }

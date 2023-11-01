@@ -1,14 +1,18 @@
 package today.edu;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
-
+import javax.swing.*;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import today.edu.MyAppT;
+import today.edu.User;
 
 import javax.swing.*;
 
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 public class loginstep {
     public MyAppT obj;
     public boolean forget = false;
@@ -19,25 +23,23 @@ public class loginstep {
     public loginstep(MyAppT iobj) {
         super();
         this.obj = iobj;
+        User u1= new User("haya","123","7\3\2004");
+        obj.up.add(u1);
+        User u2= new User("Asma@gmail.com","1234","7\3\2004");
+        obj.up.add(u2);
     }
 
     @Given("I am not in system")
-    public void iAmNotInSystem()
+    public void mmm()
     {
-        obj.isLogedin=false;
+        //  obj.isLogged=false;
+        obj.iAmNotInSystem(obj);
     }
-
-    @When("set username {string} and pass {string} and pass from system")
+    @When("set username {string} and pass {string}")
     public void setUsernameAndPassAndPassFromSystem(String user_name, String pass) {
         // Write code here that turns the phrase above into concrete actions
         // throw new io.cucumber.java.PendingException();
-        for (User u: obj.up) {
-
-            if (user_name.equals(u.getUser_name()) && u.getPass().equals(pass)) {
-                obj.f = true;
-                break;
-            }
-        }
+        obj.setUsernameAndPassAndPassFromSystem(user_name,pass);
     }
     @Then("login succeed")
     public void loginSucceed() {
@@ -45,7 +47,11 @@ public class loginstep {
         // throw new io.cucumber.java.PendingException();
         assertTrue("Login should succeed", obj.f);
     }
-
+    @When("set invalid username {string} and pass {string}")
+    public void setInvalidUsernameAndPass(String user_name, String pass) {
+        // Write code here that turns the phrase above into concrete actions
+        obj.setInvalidUsernameAndPass(user_name,pass);
+    }
     @Then("login failed")
     public void loginFailed() {
         // Write code here that turns the phrase above into concrete actions
@@ -53,44 +59,21 @@ public class loginstep {
         assertFalse("Login should fail", obj.f);
     }
 
-    @When("set invalid username {string} and pass {string}")
-    public void setInvalidUsernameAndPass(String user_name, String pass) {
-        // Write code here that turns the phrase above into concrete actions
-        for (User u: obj.up) {
-
-            if (user_name.equals(u.getUser_name()) && u.getPass().equals(pass)) {
-                obj.f = true;
-                break;
-            }
-        }
-    }
-
-
     @When("set valid username {string} and invalid pass {string}")
     public void setValidUsernameAndInvalidPass(String user_name, String pass) {
-        for (User u: obj.up) {
-
-            if (user_name.equals(u.getUser_name()) && u.getPass().equals(pass)) {
-                obj.f = true;
-                break;
-            }
-        }
-
+        obj.setValidUsernameAndInvalidPass(user_name,pass);
     }
 
     @When("set empty username {string} and pass {string}")
     public void setEmptyUsernameAndPass(String user_name, String pass) {
 
-        if (user_name.isEmpty())
-            obj.f = false;
-
+        obj.setEmptyUsernameAndPass(user_name,pass);
     }
 
     @When("set valid username {string} and empty pass {string}")
     public void setValidUsernameAndEmptyPass(String user_name, String pass) {
 
-        if (pass.isEmpty())
-            obj.f = false;
+        obj.setValidUsernameAndEmptyPass(user_name,pass);
 
     }
 
@@ -126,50 +109,12 @@ public class loginstep {
 
     @And("i don't have an account")
     public void iDonTHaveAnAccount() {
-        obj.isLogedin=false;
+        obj.isLogged=false;
     }
 
-    @When("set new username {string} and pass {string}")
-    public void setNewUsernameAndPass(String user_name, String pass) {
-        int flag=0;
-        char[]ma=user_name.toCharArray();
-        for (char value : ma) {
-            if (!( (value >= 'A' && value <= 'Z') || (value >= 'a' && value <= 'z') ))
-                flag += 1;
-        }
-        if(flag>=1){
-            JOptionPane.showMessageDialog(null,"make sure that your name only contains letters");
-            System.exit(0);
-        }
-        int cc=0;
-        int cs=0;
-        int cn=0;
-        char[]ma2=pass.toCharArray();
-        if(ma2.length<12){
-            JOptionPane.showMessageDialog(null,"Make sure that your password is at least 12 latters");
-            System.exit(0);
-        }
-        else {
-            for (char c : ma2) {
-                if (!((ma2[0] >= 'A' && ma2[0] <= 'Z') || (ma2[0] >= 'a' && ma2[0] <= 'z'))) {
-                    JOptionPane.showMessageDialog(null, "your password should start with letter ");
-                    System.exit(0);
-                }
-                else {
-                    if (c >= 'A' && c <= 'Z')
-                        cc++;
-                    if (c >= 'a' && c <= 'z')
-                        cs++;
-                    if (c >= '0' && c <= '9')
-                        cn++;
-                }
-            }
-        }
-            if (cc < 3 || cs < 3 || cn < 4) {
-                JOptionPane.showMessageDialog(null, "your password is too weak it must contain at least 3 capital letters,3 small letters, and 4 numbers");
-                System.exit(0);
-            }
-        obj.up.add(new User(user_name, pass) );
+    @When("set new username {string} and pass {string} and bd={string}")
+    public void setNewUsernameAndPass(String user_name, String pass,String bd) {
+        obj.up.add(new User(user_name, pass,bd));
         enteredUsername = user_name;
         enteredPassword = pass;
     }
@@ -185,7 +130,6 @@ public class loginstep {
         }
 
         assertTrue("User creation should succeed", userCreated);
-}
-
+    }
 }
 

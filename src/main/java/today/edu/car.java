@@ -14,6 +14,13 @@ public class car {
         availab=A;
         descr=D;
     }
+    public car(){
+        car_name="";
+        categorie="";
+        price=0;
+        availab=0;
+        descr="";
+    }
 
     public int getPrice() {
         return price;
