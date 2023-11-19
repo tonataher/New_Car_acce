@@ -24,6 +24,10 @@ public class MyAppT
         cp.add(c1);
         car c2 = new car("motor-v2","Interior",5000,100,"essintial part");
         cp.add(c2);
+        User u3= new User("Fatina","1234","2\4\2004");
+        up.add(u3);
+        order o1 = new order(u3.getUser_name(), c2.getCar_name(), "20-10-2023");
+        op.add(o1);
     }
 
     public void setUsernameAndPassAndPassFromSystem(String user_name, String pass) {
