@@ -7,6 +7,10 @@ public class MyAppT
 
     public boolean isLogged=false;
     public boolean f=false;
+    public  boolean isInstallation=false;
+    public boolean submit = false;
+    public boolean available1 = false;
+    public boolean available2 = false;
     public  ArrayList<User> up=new ArrayList<User>();
     public ArrayList<car> cp = new ArrayList<car>();
     public ArrayList<order> op = new ArrayList<order>();
