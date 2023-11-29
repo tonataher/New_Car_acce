@@ -8,6 +8,7 @@ public class Main {
     static MyAppT o = new MyAppT();
     static boolean cm=true;
     static boolean cm2=true;
+    static public String genera;
 
     public static void main(String[] args) {
         System.out.println("The menu of our programme like that:-");
@@ -33,6 +34,7 @@ public class Main {
             System.out.println("Enter the Gmail for your account");
             String s1;
             s1 = input.next();
+            genera=s1;
             System.out.println("Enter the password for your account");
             String s2;
             s2 = input.next();
@@ -54,8 +56,8 @@ public class Main {
                     {
                         System.out.println("1:-You can manage user account");
                         System.out.println("2:-You can manage the products in the company");
-                        int hjk=input.nextInt();
-                        if(hjk==1)
+                        int Role=input.nextInt();
+                        if(Role==1)
                         {
                             System.out.println("1:- Change information for previous users");
                             System.out.println("2:- adding new user");
@@ -106,7 +108,7 @@ public class Main {
                                 System.out.println("Please repeat the process again... ");
                             }
                         }
-                        else if(hjk==2) {
+                        else if(Role==2) {
                             System.out.println("1:- Add a new product .");
                             System.out.println("2:- Make a list for all the products in the company .");
                             System.out.println("3:- Search on a product by entering it's name .");
@@ -159,6 +161,15 @@ public class Main {
                                 System.out.println("Please repeat the process again... ");
                             }
                         }
+                        else if (Role==3)
+                        {
+                            System.out.println("Write the date that you want to make it available for buying");
+                            String d=input.next();
+                            o.date.add(d);
+                            System.out.println("Done in Successfully way");
+                            System.out.println("Do you want to do anther thing ??!");
+                            cm=o.corn();
+                        }
                         else {
                             System.out.println("Sorry no choice as that ...");
                             System.out.println("Please repeat the process again... ");
@@ -173,17 +184,39 @@ public class Main {
                 {
                     while(cm2) {
                         System.out.println("This ID means that you are the CUSTOMER so your permissions like that:-");
-                        System.out.println("you could buy a product so if you want please enter these information");
-                        System.out.println("Please enter the name of the product that you want to buy it");
-                        String h = input.next();
-                        System.out.println("write the date for buying this product");
-                        String klj = input.next();
-                        System.out.println("Write the number of peaces that you want to buy it from this product");
-                        String fff = input.next();
-                        int cv = Integer.parseInt(fff);
-                        o.buying(h, klj, cv);
-                        System.out.println("Do you want to repeat this process ??!");
-                        cm2=o.corn();
+                        System.out.println("1:-you could buy a product so if you want please enter these information");
+                        System.out.println("2:-you could change your password");
+                        int b=input.nextInt();
+                        if(b==1) {
+                            System.out.println("Please enter the name of the product that you want to buy it");
+                            String h = input.next();
+                            System.out.println("write the date for buying this product");
+                            String klj = input.next();
+                            System.out.println("Write the number of peaces that you want to buy it from this product");
+                            String fff = input.next();
+                            int cv = Integer.parseInt(fff);
+                            o.buying(h, klj, cv);
+                            System.out.println("Do you want to repeat this process ??!");
+                            cm2 = o.corn();
+                        }
+                        else if(b==2)
+                        {
+                            System.out.println("enter the new password that you want to have it");
+                            String np=input.next();
+                            int l=o.yourInformationUpdatesSuccessfully(genera,np);
+                            if(l==1)
+                                System.out.println("done in successfully way");
+                            System.out.println("Do you want to repeat this process ??!");
+                            cm2 = o.corn();
+                        }
+                        else if(b==3)
+                        {
+                            int ll=o.theInformationShouldAppear(genera);
+                            if(ll==0)
+                                System.out.println("No previous orders");
+                            System.out.println("Do you want to repeat this process ??!");
+                            cm2 = o.corn();
+                        }
                     }
                 }
                 else
