@@ -1,12 +1,8 @@
 package today.edu;
-import today.edu.MyAppT;
-import today.edu.User;
-import today.edu.car;
-import today.edu.order;
+
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import static org.junit.Assert.assertTrue;
 import javax.mail.*;
 import javax.mail.internet.*;
 import java.util.Properties;

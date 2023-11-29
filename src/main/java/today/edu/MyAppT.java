@@ -14,7 +14,7 @@ public class MyAppT
     public  ArrayList<User> up=new ArrayList<User>();
     public ArrayList<car> cp = new ArrayList<car>();
     public ArrayList<order> op = new ArrayList<order>();
-    public String []date = {"20-10-2023","22-10-2023","5-11-2023"};
+    public ArrayList<String>date = new ArrayList<String>();
 
     public MyAppT()
     {
@@ -32,6 +32,9 @@ public class MyAppT
         up.add(u3);
         order o1 = new order(u3.getUser_name(), c2.getCar_name(), "20-10-2023");
         op.add(o1);
+        date.add("20-10-2023");
+        date.add("22-10-2023");
+        date.add("5-11-2023");
     }
 
     public void setUsernameAndPassAndPassFromSystem(String user_name, String pass) {
@@ -221,5 +224,27 @@ public class MyAppT
         if (res.equals("No"))
             cm = false;
         return cm;
+    }
+    int yuy=0;
+    public int yourInformationUpdatesSuccessfully(String name,String pass) {
+        for (User u : up) {
+            if (name.equals(u.getUser_name())) {
+                u.setPass(pass);
+                yuy=1;
+                break;
+            }
+        }
+        return yuy;
+    }
+    int a=0;
+    public int theInformationShouldAppear(String name) {
+        for(order o : op){
+            if(name.equals(o.Uname)){
+                System.out.println(o.Cname+"\t"+o.date);
+                //System.out.println(o.date);
+                a=1;
+            }
+        }
+        return a;
     }
 }
