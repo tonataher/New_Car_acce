@@ -19,7 +19,7 @@ jobs:
           distribution: 'temurin'
 
       - name: Step3 - Build Maven Project
-        run: mvn --batch-mode -DskipTests package
+        run: mvn --batch-mode clean -DskipTests 
 
       - name: Step4 - run test cases
         run: mvn --batch-mode -Dmaven.test.failure.ignore=true -X test
