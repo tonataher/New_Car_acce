@@ -42,20 +42,8 @@ public class car {
         return descr;
     }
 
-    public void setAvailab(int availab) {
+   public void setAvailab(int availab) {
         this.availab = availab;
-    }
-
-    public void setCar_name(String car_name) {
-        this.car_name = car_name;
-    }
-
-    public void setCategorie(String categorie) {
-        this.categorie = categorie;
-    }
-
-    public void setDescr(String descr) {
-        this.descr = descr;
     }
 
     public void setPrice(int price) {
