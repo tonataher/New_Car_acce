@@ -1,7 +1,11 @@
 package org;
 
 import today.edu.MyAppT;
+import today.edu.User;
+import today.edu.car;
+import today.edu.order;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Main {
@@ -9,6 +13,137 @@ public class Main {
     static boolean cm=true;
     static boolean cm2=true;
     static public String genera;
+
+    public static int exf(String ku,String p)
+    {
+        int l=0;
+        for (User u: o.up)
+        {
+            if(ku.equals("-")||p.equals("-"))
+                l=3;
+
+            else if (ku.equals(u.getUser_name()) && u.getPass().equals(p)) {
+                l=1;
+            }
+        }
+        return l;
+    }
+    public static void iRequestInformationAboutSpecificProductByEnteringItsName2(String name) {
+
+        for(car c: o.cp ){
+            if(name.equals(c.categorie)){
+                String k=String.valueOf(c.price);
+                String f=String.valueOf(c.availab);
+                System.out.println("Name:- "+c.car_name+" || Price:- "+k+" || The num of available pieces:- "+f+" || Discribtion about it:- "+c.descr);
+
+            }
+        }
+    }
+    public static int changeInfo(String g,String np)
+    {
+        int f=0;
+        for(User c:o.up)
+        {
+            if(c.user_name.equals(g)) {
+                c.setPass(np);
+                f=1;
+            }
+        }
+        return f;
+    }
+    public static int iRequestInformationAboutSpecificProductByEnteringItsName22(int p) {
+        int l=0;
+        for(car c: o.cp ){
+            if(p==c.price){
+                String f=String.valueOf(c.availab);
+                System.out.println("Name:- "+c.car_name+" || Category:- "+c.categorie+" || The num of available pieces:- "+f+" || Discribtion about it:- "+c.descr);
+                l=1;
+            }
+            if(l==0)
+                System.out.println("No product with this price in our company");
+        }
+        return l;
+    }
+    public static void buying(String cn,String d,int r)
+    {
+         boolean a1=false;
+         boolean a2=false;
+        for(String dd: o.date) {
+            if (dd.equals(d)) {
+                a1 = true;
+                break;
+            }
+        }
+        int indexm=0;
+        int counterte=0;
+        for(car c : o.cp){
+            if (cn.equals(c.car_name)){
+                a2=true;
+                indexm=counterte;
+                break;
+            }
+            counterte++;
+        }
+        int fd=o.cp.get(indexm).availab;
+        if(a1==false) {
+
+            System.out.println("cant buy this product in this day sorry...");
+        }
+        else if (a2==false) {
+
+            System.out.println("There is no product with this name in our company sorry...");
+        }
+        else if (fd<r) {
+
+            System.out.println("We dont have the amount that you need from this product sorry...");
+        }
+        else {
+
+            int y=o.cp.get(indexm).availab;
+            y-=r;
+            o.cp.get(indexm).setAvailab(y);
+            System.out.println("Your installation has done in a successfully way...");
+        }
+
+    }
+
+    public static void listting()
+    {
+        for(car c:o.cp)
+        {
+            String forp=String.valueOf(c.price);
+            String forp2=String.valueOf(c.availab);
+            System.out.println("Name:- "+c.car_name+" || Category:- "+c.categorie+" || Price:- "+forp+" || The num of available pieces:- "+forp2+" || Discribtion about it:- "+c.descr);
+        }
+    }
+    public static void adding(String u,String p,String bd)
+    {
+        if(u.isEmpty())
+            System.out.println("You can't creat account while your name is empty");
+        if(p.isEmpty())
+            System.out.println("You can't creat account while your password is empty");
+        o.up.add(new User(u,p,bd));
+        System.out.println("Your account created successfully ...");
+    }
+    public static boolean corn()
+    {
+        Scanner input=new Scanner(System.in);
+        boolean cm=true;
+        String res = input.next();
+        if (res.equals("No") || res.equals("no"))
+            cm = false;
+        return cm;
+    }
+    public static int theInformationShouldAppear(String name) {
+        int a=0;
+        for(order o : o.op){
+            if(name.equals(o.Uname)){
+                System.out.println(o.Cname+"\t"+o.date);
+                a=1;
+            }
+        }
+        return a;
+    }
 
     public static void main(String[] args) {
         System.out.println("The menu of our programme like that:-");
@@ -28,7 +163,7 @@ public class Main {
             System.out.println("Please enter your BirthDate");
             String s3;
             s3=input.next();
-            o.adding(s1, s2, s3);
+            adding(s1, s2, s3);
         }
         if (n == 2) {
             System.out.println("Enter the Gmail for your account");
@@ -38,7 +173,7 @@ public class Main {
             System.out.println("Enter the password for your account");
             String s2;
             s2 = input.next();
-            int v = o.exf(s1, s2);
+            int v = exf(s1, s2);
             if (s1.equals("-"))
                 System.out.println("You have to write your name cant be empty");
             else if (s2.equals("-"))
@@ -69,7 +204,7 @@ public class Main {
                                 String mg=input.next();
                                 System.out.println("Write the new password for the email");
                                 String npp=input.next();
-                                int f=o.changeInfo(mg,npp);
+                                int f=changeInfo(mg,npp);
                                 if(f==0)
                                 {
                                     System.out.println("No account founded with this gmail");
@@ -77,7 +212,7 @@ public class Main {
                                 else {
                                     System.out.println("Password has changed in successfully way");
                                     System.out.println("Do you want to do anther thing ??!");
-                                    cm=o.corn();
+                                    cm=corn();
                                 }
                             }
                             else if(koiut==2)
@@ -92,15 +227,15 @@ public class Main {
                                 System.out.println("Please enter the BirthDate for the user that you want to make account for him");
                                 String s333;
                                 s333=input.next();
-                                o.adding(s111, s211, s333);
+                                adding(s111, s211, s333);
                                 System.out.println("Do you want to do anther thing ??!");
-                                cm=o.corn();
+                                cm=corn();
                             }
                             else if(koiut==3)
                             {
                                 o.seeUser();
                                 System.out.println("Do you want to do anther thing ??!");
-                                cm=o.corn();
+                                cm=corn();
                             }
                             else
                             {
@@ -128,33 +263,33 @@ public class Main {
                                 String de = input.next();
                                 o.theNameIsAndCategorieIsAndPriceIsAndAvailabilityIsAndDescriptionsIs(name, category, y, a, de);
                                 System.out.println("Do you want to do anther thing ??!");
-                                cm=o.corn();
+                                cm=corn();
                             } else if (k == 2) {
                                 cm = true;
-                                o.listting();
+                                listting();
                                 System.out.println("Do you want to do anther thing ??!");
-                                cm=o.corn();
+                                cm=corn();
                             } else if (k == 3) {
                                 cm = true;
                                 System.out.println("Write the name of the product that you are searching on it??!");
                                 String name = input.next();
                                 o.iRequestInformationAboutSpecificProductByEnteringItsName(name);
                                 System.out.println("Do you want to do anther thing ??!");
-                                cm=o.corn();
+                                cm=corn();
                             } else if (k == 4) {
                                 cm = true;
                                 System.out.println("Write the category that your product that you are searching on it belong to it??!");
                                 String name = input.next();
-                                o.iRequestInformationAboutSpecificProductByEnteringItsName2(name);
+                                iRequestInformationAboutSpecificProductByEnteringItsName2(name);
                                 System.out.println("Do you want to do anther thing ??!");
-                                cm=o.corn();
+                                cm=corn();
                             } else if (k == 5) {
                                 cm = true;
                                 System.out.println("Write the price for the product that you are searching on");
                                 int kkk = input.nextInt();
-                                int j=o.iRequestInformationAboutSpecificProductByEnteringItsName22(kkk);
+                                int j=iRequestInformationAboutSpecificProductByEnteringItsName22(kkk);
                                 System.out.println("Do you want to do anther thing ??!");
-                                cm=o.corn();
+                                cm=corn();
                             }
                             else {
                                 System.out.println("Sorry no choice as that ...");
@@ -168,7 +303,7 @@ public class Main {
                             o.date.add(d);
                             System.out.println("Done in Successfully way");
                             System.out.println("Do you want to do anther thing ??!");
-                            cm=o.corn();
+                            cm=corn();
                         }
                         else {
                             System.out.println("Sorry no choice as that ...");
@@ -195,9 +330,9 @@ public class Main {
                             System.out.println("Write the number of peaces that you want to buy it from this product");
                             String fff = input.next();
                             int cv = Integer.parseInt(fff);
-                            o.buying(h, klj, cv);
+                            buying(h, klj, cv);
                             System.out.println("Do you want to repeat this process ??!");
-                            cm2 = o.corn();
+                            cm2 = corn();
                         }
                         else if(b==2)
                         {
@@ -207,15 +342,15 @@ public class Main {
                             if(l==1)
                                 System.out.println("done in successfully way");
                             System.out.println("Do you want to repeat this process ??!");
-                            cm2 = o.corn();
+                            cm2 = corn();
                         }
                         else if(b==3)
                         {
-                            int ll=o.theInformationShouldAppear(genera);
+                            int ll=theInformationShouldAppear(genera);
                             if(ll==0)
                                 System.out.println("No previous orders");
                             System.out.println("Do you want to repeat this process ??!");
-                            cm2 = o.corn();
+                            cm2 = corn();
                         }
                     }
                 }
