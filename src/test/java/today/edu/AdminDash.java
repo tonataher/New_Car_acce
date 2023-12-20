@@ -8,10 +8,10 @@ import static org.junit.Assert.assertTrue;
 
 public class AdminDash {
     public MyAppT obj;
-    int ff=0;
+    int CustList =0;
     public boolean updates = false;
     public boolean appears = false;
-    public int r=0;
+    public String name;
     public AdminDash(MyAppT iobj)
     {
         super();
@@ -24,37 +24,30 @@ public class AdminDash {
     @When("the name is {string} and the category is {string} and the price is {int} and the num of av p is {int} and the discription is {string}")
     public void theNameIsAndTheCategoryIsAndThePriceIsAndTheNumOfAvPIsAndTheDiscriptionIs(String arg0, String arg1, int arg2, int arg3, String arg4) {
         obj.theNameIsAndCategorieIsAndPriceIsAndAvailabilityIsAndDescriptionsIs(arg0,arg1,arg2,arg3,arg4);
+        name =arg0;
     }
 
     @Then("the product add successfully")
     public void theProductAddSuccessfully() {
-        int exist=0;
-        for(car c:obj.cp)
-        {
-            if (c.car_name.equals("motor_v5")) {
-                exist = 1;
-                break;
-            }
-        }
-        assertEquals(1, exist);
+        obj.addProduct(name);
+        assertEquals(1, obj.exist);
     }
 
     @When("I ask you to list all the customer account")
     public void iAskYouToListAllTheCustomerAccount() {
         obj.seeUser();
-        ff=1;
+        CustList =1;
     }
 
     @Then("the customer account must be appear on the screen")
     public void theCustomerAccountMustBeAppearOnTheScreen() {
-        assertEquals(1, ff);
+        assertEquals(1, CustList);
     }
 
     @When("I enter the name for user {string} and the new password that i want to put it {string}")
     public void iEnterTheNameForUserAndTheNewPasswordThatIWantToPutIt(String arg0, String arg1)
     {
-        int klk= obj.yourInformationUpdatesSuccessfully(arg0,arg1);
-        updates= (klk == 1);
+        updates= (obj.yourInformationUpdatesSuccessfully(arg0,arg1) == 1);
     }
 
     @Then("The password must change successfully")
@@ -64,20 +57,14 @@ public class AdminDash {
     }
 
     @When("I give the name of product{string} and the new price for it {int}")
-    public void iGiveTheNameOfProductAndTheNewPriceForIt(String arg0, int arg1)
+    public void iGiveTheNameOfProductAndTheNewPriceForIt(String name, int newprice)
     {
-        for(car c: obj.cp)
-        {
-            if(c.car_name.equals(arg0)) {
-                c.setPrice(arg1);
-                r=1;
-            }
-        }
+       obj.newPrice(name,newprice);
     }
 
     @Then("The price must change successfully")
     public void thePriceMustChangeSuccessfully() {
-        assertEquals(1, r);
+        assertEquals(1, obj.checkPrice);
     }
 
     @When("I give you a date {string}")
