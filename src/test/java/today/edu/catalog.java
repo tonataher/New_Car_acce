@@ -1,7 +1,5 @@
 package today.edu;
 
-import today.edu.MyAppT;
-import today.edu.car;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
@@ -15,7 +13,6 @@ public class catalog {
     public MyAppT obj;
     public boolean added = false;
     public car cc=new car();
-    public ArrayList<car> carArrayList = new ArrayList<car>();
     public String Categorie;
 
     public catalog(MyAppT iobj){
@@ -47,49 +44,29 @@ public class catalog {
     @Then("Make the product descriptions, prices, and availability appear")
     public void makeTheProductDescriptionsPricesAndAvailabilityAppear() {
         assertNotNull(cc);
-        System.out.println(cc.getDescr());
-        System.out.println(cc.getPrice());
-        System.out.println(cc.getAvailab());
+        obj.printCatalog(cc);
     }
 
     @When("I request information about products by entering there categories {string}")
     public void iRequestInformationAboutProductsByEnteringThereCategories(String categ) {
-        for(car c: obj.cp ){
-            if(categ.equals(c.categorie)){
-                carArrayList.add(new car(c.getCar_name(),c.getCategorie(),c.getPrice(),c.getAvailab(),c.getDescr()));
-            }
-        }
+       obj.enterCategory(categ);
     }
 
     @Then("List all the products name, prices, availability and descriptions")
     public void listAllTheProductsNamePricesAvailabilityAndDescriptions() {
-        assertNotNull(carArrayList);
-        for(car c:carArrayList){
-            System.out.println(c.getCar_name());
-            System.out.println(c.getPrice());
-            System.out.println(c.getAvailab());
-            System.out.println(c.getDescr());
-        }
+        assertNotNull(obj.carArrayList);
+        obj.printCarList(1);
     }
 
     @When("I request information about products by entering there price {int}")
     public void iRequestInformationAboutProductsByEnteringTherePrice(int price) {
-        for(car c: obj.cp ){
-            if(price==c.price){
-                carArrayList.add(new car(c.getCar_name(),c.getCategorie(),c.getPrice(),c.getAvailab(),c.getDescr()));
-            }
-        }
+        obj.requestByPrice(price);
     }
 
     @Then("List all the products name, categories, availability and descriptions")
     public void listAllTheProductsNameCategoriesAvailabilityAndDescriptions() {
-        assertNotNull(carArrayList);
-        for(car c:carArrayList){
-            System.out.println(c.getCar_name());
-            System.out.println(c.getCategorie());
-            System.out.println(c.getAvailab());
-            System.out.println(c.getDescr());
-        }
+        assertNotNull(obj.carArrayList);
+        obj.printCarList(2);
     }
 
     @And("the product categories is loaded {string}")
@@ -99,10 +76,6 @@ public class catalog {
 
     @When("I filter products by a price range of {int} to {int}")
     public void iFilterProductsByAPriceRangeOfTo(int price1, int price2) {
-        for(car c: obj.cp){
-            if(c.price>=price1 && c.price<=price2 && Categorie.equals(c.categorie)){
-                carArrayList.add(new car(c.getCar_name(),c.getCategorie(),c.getPrice(),c.getAvailab(),c.getDescr()));
-            }
-        }
+        obj.filterPrice(price1,price2,Categorie);
     }
 }
