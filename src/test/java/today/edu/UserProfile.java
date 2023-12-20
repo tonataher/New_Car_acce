@@ -8,8 +8,6 @@ public class UserProfile {
     public MyAppT obj;
     public String name;
     public  String pass;
-    public boolean updates = false;
-    public boolean appear = false;
 
     public UserProfile(MyAppT iobj){
         super();
@@ -28,25 +26,13 @@ public class UserProfile {
 
     @Then("Your information Updates successfully")
     public void yourInformationUpdatesSuccessfully() {
-        for(User u: obj.up){
-            if(name.equals(u.getUser_name())){
-                u.setPass(pass);
-                updates = true;
-                break;
-            }
-        }
-        assertTrue("Your information Updates successfully", updates);
+       obj.updatesSuccessfully(name,pass);
+        assertTrue("Your information Updates successfully", obj.updates);
     }
 
     @Then("The information should appear")
     public void theInformationShouldAppear() {
-        for(order o : obj.op){
-            if(name.equals(o.Uname)){
-                System.out.println(o.Cname);
-                System.out.println(o.date);
-                appear = true;
-            }
-        }
-        assertTrue("Your information appear successfully", appear);
+        obj.appearInformation(name);
+        assertTrue("Your information appear successfully", obj.appear);
     }
 }
