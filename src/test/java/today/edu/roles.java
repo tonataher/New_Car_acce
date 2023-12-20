@@ -1,6 +1,4 @@
 package today.edu;
-import today.edu.MyAppT;
-import today.edu.User;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
@@ -28,12 +26,7 @@ public class roles{
 
     @When("set user name {string} and pass {string}")
     public void setUserNameAndPass(String user_name, String pass) {
-        for (User u: obj.up) {
-            if (user_name.equals(u.getUser_name()) && u.getPass().equals(pass)) {
-                obj.f = true;
-                break;
-            }
-        }
+        obj.setNamePass(user_name,pass);
     }
 
     @Then("you can Manage products")
