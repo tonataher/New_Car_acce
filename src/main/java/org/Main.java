@@ -4,8 +4,6 @@ import today.edu.MyAppT;
 import today.edu.User;
 import today.edu.car;
 import today.edu.order;
-
-import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Main {
