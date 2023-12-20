@@ -10,28 +10,4 @@ public class order {
         Cname = cname;
         date = datee;
     }
-
-    public String getCname() {
-        return Cname;
-    }
-
-    public String getDate() {
-        return date;
-    }
-
-    public String getUname() {
-        return Uname;
-    }
-
-    public void setCname(String cname) {
-        Cname = cname;
-    }
-
-    public void setDate(String date) {
-        this.date = date;
-    }
-
-    public void setUname(String uname) {
-        Uname = uname;
-    }
 }
