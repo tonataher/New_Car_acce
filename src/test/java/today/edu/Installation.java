@@ -1,9 +1,4 @@
 package today.edu;
-
-import today.edu.MyAppT;
-import today.edu.User;
-import today.edu.car;
-import today.edu.order;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
@@ -12,7 +7,6 @@ import static org.junit.Assert.assertTrue;
 
 public class Installation {
     public MyAppT obj;
-    //public String []date = {"20-10-2023","22-10-2023","5-11-2023"};
     String uname, dateee , cname;
     public Installation(MyAppT iobj){
         super();
@@ -25,12 +19,12 @@ public class Installation {
         obj.cp.add(c1);
         car c2 = new car("motor-v2","Interior",5000,100,"essintial part");
         obj.cp.add(c2);
+        c2.setAvailab(100);
     }
 
     @And("My name is {string}")
     public void myNameIs(String name) {
         uname = name;
-
     }
     @And("I'm on the installation request page")
     public void iMOnTheInstallationRequestPage() {
@@ -39,20 +33,9 @@ public class Installation {
 
     @When("the customer fills in the following details: model is {string} and date {string}")
     public void theCustomerFillsInTheFollowingDetailsModelIsAndDate(String model, String datee) {
-        for(String d: obj.date){
-            if (d.equals(datee)) {
-                obj.available1 = true;
-                dateee = datee;
-                break;
-            }
-        }
-        for(car c : obj.cp){
-            if (model.equals(c.car_name)){
-                obj.available2 = true;
-                cname = model;
-                break;
-            }
-        }
+        obj.fillModelAndDate(model,datee);
+        cname=obj.cname;
+        dateee=obj.dateee;
     }
 
     @And("submits the form")
